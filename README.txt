@@ -1,0 +1,1 @@
+This is the group 6 exam project
