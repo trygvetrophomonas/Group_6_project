@@ -72,3 +72,4 @@ mydata_joined$antibody<- as.factor(mydata_joined$antibody)
 class(mydata_joined$antibody))
 
 #takkforidag
+3blabla
