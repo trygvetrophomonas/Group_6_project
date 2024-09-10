@@ -69,6 +69,6 @@ mydata_joined %>%
 #changing the antibody from numeric to factor: 
 
 mydata_joined$antibody<- as.factor(mydata_joined$antibody)
-class(mydata_joined$antibody)
+class(mydata_joined$antibody))
 
-)
+#takkforidag
