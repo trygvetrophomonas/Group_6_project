@@ -61,9 +61,6 @@ mydata_joined <- mydata %>%
 mydata_joined$gender <- as.factor(mydata_joined$gender)
 class(mydata_joined$gender)   
 
-mydata_joined2 <- mydata_joined %>%
-  factor(rx = character(), levels = 0, 1)
-
 # Joined mydata with mydata2
 # Changed the type of "gender" to factor
 # There are two column names in the codebook that we do not have. 
@@ -76,6 +73,21 @@ mydata_joined %>%
   count(bleed)
 
 # exploring data: 575 NA in "bleed", 402 NA in antibody
+
+# Remove unnecessary columns from your dataframe: `acinar, train, amp, pdstent`
+
+mydata_joined <- mydata_joined %>%
+  select(-c(acinar, train, amp, pdstent))
+
+mydata_joined <- mydata_joined %>%
+  mutate(rx = 
+           case_when(rx == "placebo"~ 0,
+                     rx == "indomethacin" ~ 1))
+
+mydata_joined$rx <- factor(mydata_joined$rx, levels = c(0,1))
+
+# changed the varriable rx to a factor with 2 levels, 0 and 1
+
 
 tidy_data_group6 <- paste0("mydata_joined", Sys.Date(), ".txt")
 write_delim(mydata_joined, 
