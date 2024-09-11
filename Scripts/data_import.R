@@ -68,3 +68,11 @@ mydata_joined %>%
 
 #402 NA for antibodies  
 sum(is.na(mydata_joined$antibody))
+
+# Create a new column showing whether age is higher than 35 or not: values High/Low
+library(dplyr)
+mydata_joined<-mydata_joined %>% 
+  mutate(age_cat = case_when(age >= 36 ~ "High",
+                             age <= 35 ~ "Low" 
+                              ))
+  
