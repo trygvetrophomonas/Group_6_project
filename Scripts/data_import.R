@@ -1,5 +1,6 @@
 library(tidyverse)
 library(here)
+
 library(skimr)
 library(naniar)
 
@@ -77,3 +78,4 @@ mydata_joined %>%
 tidy_data_group6 <- paste0("mydata_joined", Sys.Date(), ".txt")
 write_delim(mydata_joined, 
             file = here("DATA", tidy_data_group6), delim="\t")
+
