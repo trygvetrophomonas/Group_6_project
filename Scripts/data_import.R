@@ -1,70 +1,81 @@
 library(tidyverse)
 library(here)
-library("skimr")
-library("naniar")
 
-#importing and naming the dataset "mydata"----
-mydata <-read_delim(here("DATA", "exam_dataset.txt"))
+library(skimr)
+library(naniar)
 
-#exploring data----
+mydata <- read_delim(here("DATA", "exam_dataset.txt"))
+mydata
+
+#initial exploration of data ----
+
 tail(mydata)
-tail(mydata, n=30)
-view("mydata")
+head(mydata)
+view(mydata)
+mydata %>% count(id)
+glimpse(mydata)
+skimr::skim(mydata)
+naniar::gg_miss_var(mydata)
 
-#or look in environment to se MyData, press arrow or open the file
 
-# coloumns 81ASA 325ASA and feature type need to be renamed
-#all variables are in colomns 
-#all variables except age and risk should be factor
+# 602 "ids" are duplicated
+# two colomn names start with a number
+# one colomn name with a space
+# variable types wrong, some should be changed from "character" to "factor"
+# many missing values in "bleed"
+# colomn missing: sod, pep
+# column to delete: feature type, feature_value
 
-skimr::skim("mydata")
-
-mydata%>% 
-  naniar::gg_miss_var()
-#see gg-plot for missing variables:there are almost 600 NA for bleed
-
-# delete these colomns: feature type? feature value?
-#add these colomns: sod, pep, 
-
-#dropping variables feature type, feature value
 mydata <- mydata %>%
-  select(-c(`feature type`, feature_value))
+  rename(feature_type = `feature type`)
+mydata
 
-#rename two variables because of started with a number: 
-mydata<-mydata%>%
+# changed column name with space
+
+mydata <- mydata %>%
+  select(-c(feature_type, feature_value))
+
+# removed unnessesary columns
+
+mydata <- mydata %>%
   rename(asa81 = "81asa")
+mydata
 
-mydata<-mydata%>%
+mydata <- mydata%>%
   rename(asa325 = "325asa")
 
-#remove duplicated rows: 
-mydata<-mydata%>%
+# changed names ov columns witch started wit a number
+
+mydata <- mydata %>%
   distinct()
 
-view(mydata)
+# removed dupolicate rows
 
-#importing the Joindata file
-mydata2 <-read_delim(here("Data", "exam_joindata.txt"))
-
-#viewing the file
+mydata2 <- read_delim(here("DATA", "exam_joindata.txt"))
 mydata2
 
-#remove duplicates in joindata
-mydata2<-mydata2%>%
-  distinct()
-mydata2
+# leste inn additional data
 
-#full join of files: 
-mydata_joined<-mydata%>%
+mydata_joined <- mydata %>%
   full_join(mydata2, join_by("id"))
 
-#checking for NAs: ca 400 for antibodies
-mydata_joined%>% 
+mydata_joined$gender <- as.factor(mydata_joined$gender)
+class(mydata_joined$gender)   
+
+# Joined mydata with mydata2
+# Changed the type of "gender" to factor
+# There are two column names in the codebook that we do not have. 
+# Since we dont have any observations for these two columns we did not add them
+
+mydata_joined %>%
   naniar::gg_miss_var()
 
-#Counting NAs: 575 for bleed, works because there are only 3 outcomes
 mydata_joined %>%
   count(bleed)
 
-#402 NA for antibodies  
-sum(is.na(mydata_joined$antibody))
+# exploring data: 575 NA in "bleed",
+
+tidy_data_group6 <- paste0("mydata_joined", Sys.Date(), ".txt")
+write_delim(mydata_joined, 
+            file = here("DATA", tidy_data_group6), delim="\t")
+
