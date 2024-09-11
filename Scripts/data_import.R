@@ -3,15 +3,15 @@ library(here)
 library("skimr")
 library("naniar")
 
-#importing and naming the dataset "mydata"
+#importing and naming the dataset "mydata"----
 mydata <-read_delim(here("DATA", "exam_dataset.txt"))
 
-#exploring data
+#exploring data----
 tail(mydata)
 tail(mydata, n=30)
 view("mydata")
 
-#or look in enviroment to se MyData, press arrow or open the file
+#or look in environment to se MyData, press arrow or open the file
 
 # coloumns 81ASA 325ASA and feature type need to be renamed
 #all variables are in colomns 
@@ -65,11 +65,6 @@ mydata_joined%>%
 #Counting NAs: 575 for bleed, works because there are only 3 outcomes
 mydata_joined %>%
   count(bleed)
-  
-#changing the antibody from numeric to factor: 
 
-mydata_joined$antibody<- as.factor(mydata_joined$antibody)
-class(mydata_joined$antibody))
-
-#takkforidag
-3blabla
+#402 NA for antibodies  
+sum(is.na(mydata_joined$antibody))
