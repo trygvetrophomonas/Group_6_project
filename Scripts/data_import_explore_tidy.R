@@ -73,20 +73,18 @@ sum(is.na(mydata_joined$antibody))
 mydata_joined %>%
   count(bleed)
 
-<<<<<<< HEAD:Scripts/data_import.R
+# exploring data: 575 NA in "bleed",
 
+# exploring data: 575 NA in "bleed", 402 NA in antibody
 
 # Create a new column showing whether age is higher than 35 or not: values High/Low
+
 library(dplyr)
 mydata_joined<-mydata_joined %>% 
   mutate(age_cat = case_when(age >= 36 ~ "High",
                              age <= 35 ~ "Low" 
                               ))
-  
-=======
-# exploring data: 575 NA in "bleed",
-=======
-# exploring data: 575 NA in "bleed", 402 NA in antibody
+
 
 # Remove unnecessary columns from your dataframe: `acinar, train, amp, pdstent`
 
@@ -100,9 +98,8 @@ mydata_joined <- mydata_joined %>%
 
 mydata_joined$rx <- factor(mydata_joined$rx, levels = c(0,1))
 
-# changed the varriable rx to a factor with 2 levels, 0 and 1 "ß
+# changed the varriable rx to a factor with 2 levels, 0 and 1 "
 
->>>>>>> Group_6_project_trygve:Scripts/data_import_explore_tidy.R
 
 tidy_data_group6 <- paste0("mydata_joined", Sys.Date(), ".txt")
 write_delim(mydata_joined, 
