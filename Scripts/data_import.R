@@ -73,6 +73,16 @@ mydata_joined %>%
 mydata_joined %>%
   count(bleed)
 
+
+
+# Create a new column showing whether age is higher than 35 or not: values High/Low
+library(dplyr)
+mydata_joined<-mydata_joined %>% 
+  mutate(age_cat = case_when(age >= 36 ~ "High",
+                             age <= 35 ~ "Low" 
+                              ))
+  
+=======
 # exploring data: 575 NA in "bleed",
 
 tidy_data_group6 <- paste0("mydata_joined", Sys.Date(), ".txt")
