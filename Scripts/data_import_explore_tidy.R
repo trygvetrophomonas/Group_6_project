@@ -49,12 +49,12 @@ mydata <- mydata%>%
 mydata <- mydata %>%
   distinct()
 
-# removed dupolicate rows
+# removed duplicate rows
 
 mydata2 <- read_delim(here("DATA", "exam_joindata.txt"))
 mydata2
 
-# leste inn additional data
+# read inn additional data
 
 mydata_joined <- mydata %>%
   full_join(mydata2, join_by("id"))
@@ -69,10 +69,11 @@ class(mydata_joined$gender)
 
 mydata_joined %>%
   naniar::gg_miss_var()
-
+sum(is.na(mydata_joined$antibody))
 mydata_joined %>%
   count(bleed)
 
+<<<<<<< HEAD:Scripts/data_import.R
 
 
 # Create a new column showing whether age is higher than 35 or not: values High/Low
@@ -84,6 +85,24 @@ mydata_joined<-mydata_joined %>%
   
 =======
 # exploring data: 575 NA in "bleed",
+=======
+# exploring data: 575 NA in "bleed", 402 NA in antibody
+
+# Remove unnecessary columns from your dataframe: `acinar, train, amp, pdstent`
+
+mydata_joined <- mydata_joined %>%
+  select(-c(acinar, train, amp, pdstent))
+
+mydata_joined <- mydata_joined %>%
+  mutate(rx = 
+           case_when(rx == "placebo"~ 0,
+                     rx == "indomethacin" ~ 1))
+
+mydata_joined$rx <- factor(mydata_joined$rx, levels = c(0,1))
+
+# changed the varriable rx to a factor with 2 levels, 0 and 1 "ß
+
+>>>>>>> Group_6_project_trygve:Scripts/data_import_explore_tidy.R
 
 tidy_data_group6 <- paste0("mydata_joined", Sys.Date(), ".txt")
 write_delim(mydata_joined, 
