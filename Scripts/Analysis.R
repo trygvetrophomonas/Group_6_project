@@ -1,4 +1,4 @@
-# According to the data, was the indomethacin reducing the risk of pancreatitis?
+# According to the data, was the indomethacin reducing the risk of pancreatitis??
 
 
 mydata3 %>% 
