@@ -41,7 +41,13 @@ mydata <- mydata%>%
 
 
 mydata <- mydata %>%
+  pivot_wider(names_from = feature_type, values_from = feature_value)
+
+# tidying the column feature type and feture value to new columns with varriable names
+
+mydata <- mydata %>%
   distinct()
+
 
 # changed names ov columns witch started wit a number
 
@@ -87,7 +93,6 @@ library(dplyr)
 mydata_joined<-mydata_joined %>% 
   mutate(age_cat = case_when(age >= 36 ~ "High",
                              age <= 35 ~ "Low" 
-                              ))
 
 
 # Remove unnecessary columns from your dataframe: `acinar, train, amp, pdstent`
@@ -105,7 +110,5 @@ mydata_joined$rx <- factor(mydata_joined$rx, levels = c(0,1))
 # changed the varriable rx to a factor with 2 levels, 0 and 1 "
 
 
-tidy_data_group6 <- paste0("mydata_joined", Sys.Date(), ".txt")
-write_delim(mydata_joined, 
-            file = here("DATA", tidy_data_group6), delim="\t")
+
 
