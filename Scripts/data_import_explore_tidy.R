@@ -1,6 +1,6 @@
 library(tidyverse)
 library(here)
-
+library(dplyr)
 library(skimr)
 library(naniar)
 
@@ -11,7 +11,6 @@ mydata
 
 tail(mydata)
 head(mydata)
-view(mydata)
 mydata %>% count(id)
 glimpse(mydata)
 skimr::skim(mydata)
@@ -40,7 +39,6 @@ mydata
 mydata <- mydata%>%
   rename(asa325 = "325asa")
 
-# changed names ov columns witch started wit a number
 
 mydata <- mydata %>%
   pivot_wider(names_from = feature_type, values_from = feature_value)
@@ -49,6 +47,15 @@ mydata <- mydata %>%
 
 mydata <- mydata %>%
   distinct()
+
+
+# changed names ov columns witch started wit a number
+
+ mydata <- mydata %>%
+  pivot_wider(names_from = feature_type, values_from = feature_value)
+
+ # tidying the column feature type and feture value to new columns with varriable names
+
 
 # checked if there is duplicate rows removed duplicate rows
 
@@ -103,8 +110,5 @@ mydata_joined$rx <- factor(mydata_joined$rx, levels = c(0,1))
 # changed the varriable rx to a factor with 2 levels, 0 and 1 "
 
 
-tidy_data_group6 <- paste0("mydata_joined", Sys.Date(), ".txt")
-write_delim(mydata_joined, 
-            file = here("DATA", tidy_data_group6), delim="\t")
 
 
