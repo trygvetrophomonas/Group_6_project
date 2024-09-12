@@ -1,6 +1,6 @@
 library(tidyverse)
 library(here)
-
+library(dplyr)
 library(skimr)
 library(naniar)
 
@@ -11,7 +11,6 @@ mydata
 
 tail(mydata)
 head(mydata)
-view(mydata)
 mydata %>% count(id)
 glimpse(mydata)
 skimr::skim(mydata)
@@ -40,6 +39,10 @@ mydata
 mydata <- mydata%>%
   rename(asa325 = "325asa")
 
+
+mydata <- mydata %>%
+  distinct()
+
 # changed names ov columns witch started wit a number
 
  mydata <- mydata %>%
@@ -47,8 +50,6 @@ mydata <- mydata%>%
 
  # tidying the column feature type and feture value to new columns with varriable names
 
-mydata <- mydata %>%
-  distinct()
 
 # checked if there is duplicate rows removed duplicate rows
 
