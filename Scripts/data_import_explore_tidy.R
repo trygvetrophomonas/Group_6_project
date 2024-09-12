@@ -87,7 +87,7 @@ mydata_joined <- mydata_joined %>%
 
 mydata_joined$rx <- factor(mydata_joined$rx, levels = c(0,1))
 
-# changed the varriable rx to a factor with 2 levels, 0 and 1 "ß
+# changed the varriable rx to a factor with 2 levels, 0 and 1 
 
 
 tidy_data_group6 <- paste0("mydata_joined", Sys.Date(), ".txt")
