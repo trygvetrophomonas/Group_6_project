@@ -68,7 +68,6 @@ class(mydata_joined$gender)
 
 # Changed the type of "gender" to factor
 
-# Since we dont have any observations for these two columns we did not add them
 
 mydata_joined %>%
   naniar::gg_miss_var()
@@ -76,7 +75,6 @@ sum(is.na(mydata_joined$antibody))
 mydata_joined %>%
   count(bleed)
 
-# exploring data: 575 NA in "bleed",
 
 # exploring data: 575 NA in "bleed", 402 NA in antibody
 
@@ -85,7 +83,7 @@ mydata_joined %>%
 library(dplyr)
 mydata_joined<-mydata_joined %>% 
   mutate(age_cat = case_when(age >= 36 ~ "High",
-                             age <= 35 ~ "Low" 
+                             age <= 35 ~ "Low" ))
 
 
 # Remove unnecessary columns from your dataframe: `acinar, train, amp, pdstent`
