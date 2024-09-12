@@ -32,10 +32,6 @@ mydata
 
 # changed column name with space
 
-mydata <- mydata %>%
-  select(-c(feature_type, feature_value))
-
-# removed unnessesary columns
 
 mydata <- mydata %>%
   rename(asa81 = "81asa")
@@ -46,10 +42,15 @@ mydata <- mydata%>%
 
 # changed names ov columns witch started wit a number
 
+ mydata <- mydata %>%
+  pivot_wider(names_from = feature_type, values_from = feature_value)
+
+ # tidying the column feature type and feture value to new columns with varriable names
+
 mydata <- mydata %>%
   distinct()
 
-# removed duplicate rows
+# checked if there is duplicate rows removed duplicate rows
 
 mydata2 <- read_delim(here("DATA", "exam_joindata.txt"))
 mydata2
@@ -59,12 +60,14 @@ mydata2
 mydata_joined <- mydata %>%
   full_join(mydata2, join_by("id"))
 
+# Joined mydata with mydata2
+
 mydata_joined$gender <- as.factor(mydata_joined$gender)
 class(mydata_joined$gender)   
 
-# Joined mydata with mydata2
+
 # Changed the type of "gender" to factor
-# There are two column names in the codebook that we do not have. 
+
 # Since we dont have any observations for these two columns we did not add them
 
 mydata_joined %>%
