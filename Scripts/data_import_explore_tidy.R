@@ -86,7 +86,6 @@ library(dplyr)
 mydata_joined<-mydata_joined %>% 
   mutate(age_cat = case_when(age >= 36 ~ "High",
                              age <= 35 ~ "Low" 
-  ))
 
 
 # Remove unnecessary columns from your dataframe: `acinar, train, amp, pdstent`
