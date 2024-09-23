@@ -107,6 +107,17 @@ mydata_joined <- mydata_joined %>%
 mydata_joined$rx <- factor(mydata_joined$rx, levels = c(0,1))
 
 
+#adding a column where pep 1=yes, 0=no
+mydata3<-mydata3 %>% 
+  mutate(pep_cat = case_when(pep = 1 ~ "yes",
+                             pep= 0 ~ "no" ))
+
+mydata3<- mydata3%>%
+  mutate(pep_cat = 
+           if_else(pep =="yes" ,
+                   true = 1,
+                   false = 0))
+
 
 
 
