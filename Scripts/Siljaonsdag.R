@@ -23,3 +23,7 @@ too_few = "debug"
 mydata_joined<-mydata_joined %>% 
   mutate (age_and_risk = age*risk)
 view(mydata_joined$age_and_risk)
+
+#rearranging the columns. works. add site as nr 2
+mydata_joined %>% 
+select(id,age, everything())
