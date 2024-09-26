@@ -11,8 +11,9 @@ We cleaned the data: deleted 2 column names, renamed two columns, changed some v
 We wrangled the data: We fulljoined the datasets into mydata_joined2024-09-12.txt. We changed the name of some variables, added subset groups, mutated some of the variables. 
 We analysed  some of the questions by making plots using ggplot2. 
 All of this is found in the folder "scripts"
+The final file is named "finaldata.txt""
 
 We uploaded the project to Github under the name "trygvetrophomonas/Group_6_project"
-We added the license for that, see separate folder
+We added the license for that, see separate file
 
 We created a final report in R markdown, "report Group 6.rmd"
