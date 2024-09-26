@@ -1,29 +1,36 @@
-
-#creating a new variable where pep 1 =yes, pep 0 =no
-mydata_joined %>% 
-  mutate(pep_cat = 
-           if_else(pep =="yes" ,
-                   true = 1,
-                   false = 0))
 library(dplyr)
-mydata_joined <-mydata_joined %>% 
-  mutate(pep_cat = case_when(pep = 1 ~ "yes",
-                             pep= 0 ~ "no" ))
+library(here)
+library(tidyr)
+library(tidyverse)
+library(readr)
 
-#separating IDs into different sites-doesnt work
-mydata3$id
+finaldata <- read_delim(here("DATA", "finaldata.txt"))
 
-mydata_joined %>% 
-  separate_wider_delim(id, delim="_", names = c("site_1", "site_2", "site_3", "site_4"))
+#creating a variable that is a product of age and risk. 
 
-too_few = "debug"
-"align_start"/"align_end"
-
-#creating a variable that is a product of age and risk. works
-mydata_joined<-mydata_joined %>% 
+finaldata<-finaldata %>% 
   mutate (age_and_risk = age*risk)
-view(mydata_joined$age_and_risk)
 
-#rearranging the columns. works. add site as nr 2
-mydata_joined %>% 
-select(id,age, everything())
+view(finaldata$age_and_risk)
+
+#separating IDs into different sites
+
+finaldata_separated <- finaldata %>%
+  separate_wider_delim(col = id, delim = "_", names = c("Site", "ID"))
+
+print(finaldata_separated)
+
+
+#rearranging the columns 
+finaldata_separated%>% 
+select(ID, Site, age, everything())
+
+glipmse(finaldata_separated)
+
+#saving final file2. 
+
+write_delim(finaldata_separated, "./DATA/finaldata2.txt", delim = " ")
+
+
+
+
