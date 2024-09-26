@@ -5,27 +5,39 @@ date: "`r Sys.Date()`"
 output: html_document
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
 
 This is the report for Group 6 assignment for the R course UiB, 2024
 
-The assignment was to look at data  sourced from the paper in the New England Journal of Medicine, entitled, A Randomized Trial of Rectal Indomethacin to Prevent Post-ERCP Pancreatitis, pages 1414-1422 volume 366, 2012 edition, authored by the Elmunzer, BJ, Higgins PDR, et al.
+The assignment was to look at data  ourced from the paper in the New England Journal of Medicine, entitled, A Randomized Trial of Rectal Indomethacin to Prevent Post-ERCP Pancreatitis, pages 1414-1422 volume 366, 2012 edition, authored by the Elmunzer, BJ, Higgins PDR, et al.
 
 The data had to be cleaned and rearranged in order to analyse it. 
 The main question was whether the prophylactic use of Indometacin would reduce the risk for ERCP-assosiated pancreatitis. 
 
-```{r cars}
-summary(cars)
-```
 
+```
+Result: Among patients at high risk for post-ERCP pancreatitis, rectal indomethacin significantly reduced the incidence of the condition
 ## Including Plots
 
 You can also embed plots, for example:
 
-```{r pressure, echo=FALSE}
-plot(pressure)
+'''{r, echo=FALSE, message=FALSE, warning=FALSE}
+
+library(here)
+library(readr)
+library(dplyr)
+library(broom)
+library(ggplot2)
+
+```{mydata3<-read_delim(here("DATA", "finaldata2.txt")) 
+mydata3 %>% 
+  wilcox.test(pep~rx, data = .) %>%
+  broom::tidy()
+  
+
+
+ggplot(data=mydata3, aes(rx)) +
+  geom_bar(aes(fill = as.factor(pep)), position = "dodge"), echo=FALSE}
+
 ```
 
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
