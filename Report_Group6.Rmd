@@ -1,6 +1,6 @@
 ---
 title: "Report_Group6"
-author: "Trygve Kristiansen"
+authors: "Trygve Kristiansen, Ritha Willio, Silja Hanseth"
 date: "`r Sys.Date()`"
 output: html_document
 ---
@@ -9,11 +9,12 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## R Markdown
-Dette er starten
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+This is the report for Group 6 assignment for the R course UiB, 2024
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+The assignment was to look at data  sourced from the paper in the New England Journal of Medicine, entitled, A Randomized Trial of Rectal Indomethacin to Prevent Post-ERCP Pancreatitis, pages 1414-1422 volume 366, 2012 edition, authored by the Elmunzer, BJ, Higgins PDR, et al.
+
+The data had to be cleaned and rearranged in order to analyse it. 
+The main question was whether the prophylactic use of Indometacin would reduce the risk for ERCP-assosiated pancreatitis. 
 
 ```{r cars}
 summary(cars)
