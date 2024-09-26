@@ -1,6 +1,6 @@
 library(tidyverse)
 library(here)
-mydata3 <- read_delim(here("DATA", "finaldata2.txt"))
+mydata3 <- read_delim(here("DATA", "mydata_joined2024-09-12.txt"))
 mydata3
 
 # Plot Does the age distribution depend on `sod_type`?
